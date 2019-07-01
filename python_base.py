@@ -47,7 +47,7 @@
     x<<y, x>>y                                   # 位操作：x左移、右移y位
     +, -, *, /, //, %, **                        # 真除法、floor除法：返回不大于真除法结果的整数值、取余、幂运算
     -x, +x, ~x                                   # 一元减法、识别、按位求补（取反）
-    x[i], x[i:j:k]                               # 索引、分片、调用
+    x[i], x[i:j:k]                               # 索引、分片
     int(3.14), float(3)                          # 强制类型转换
     
 #-- 整数可以利用bit_length函数测试所占的位数
@@ -80,7 +80,7 @@
     set不记录元素位置或者插入点, 因此不支持indexing, slicing, 或其它类序列的操作
     """
     s = set([3,5,9,10])                          # 创建一个数值集合，返回{3, 5, 9, 10}
-    t = set("Hello")                             # 创建一个唯一字符的集合返回{}
+    t = set("Hello")                             # 创建一个字符的集合，返回{'l', 'H', 'e', 'o'}
     a = t | s;    t.union(s)                     # t 和 s的并集
     b = t & s;    t.intersection(s)              # t 和 s的交集
     c = t – s;    t.difference(s)                # 求差集（项在t中, 但不在s中）
@@ -292,7 +292,7 @@
 #-- 元组和列表的唯一区别在于元组是不可变对象，列表是可变对象
     a = [1, 2, 3]           # a[1] = 0, OK
     a = (1, 2, 3)           # a[1] = 0, Error
-    a = ([1, 2])            # a[0][1] = 0, OK
+    a = ([1, 2],)           # a[0][1] = 0, OK
     a = [(1, 2)]            # a[0][1] = 0, Error
     
 #-- 元组的特殊语法: 逗号和圆括号
@@ -320,6 +320,10 @@
     fp.truncate([size])                     # 把文件裁成规定的大小，默认的是裁到当前文件操作标记的位置。
     for line in open('data'): 
         print(line)                         # 使用for语句，比较适用于打开比较大的文件
+    with open('data') as file:
+        print(file.readline())              # 使用with语句，可以保证文件关闭
+    with open('data') as file:
+        lines = file.readlines()            # 一次读入文件所有行，并关闭文件
     open('f.txt', encoding = 'latin-1')     # Python3.x Unicode文本文件
     open('f.bin', 'rb')                     # Python3.x 二进制bytes文件
     # 文件对象还有相应的属性：buffer closed encoding errors line_buffering name newlines等
@@ -369,7 +373,7 @@
     A = 1 if X else (2 if Y else 3)
     # 也可以使用and-or语句（一条语句实现多个if-else）
     a = 6
-    result = (a > 20 and "big than 20" or a > 10 and "big than 10" or a > 5 and "big than 5")    # 返回"big than 20"
+    result = (a > 20 and "big than 20" or a > 10 and "big than 10" or a > 5 and "big than 5")    # 返回"big than 5"
 
 #-- Python的while语句或者for语句可以带else语句 当然也可以带continue/break/pass语句
     while a > 1:
@@ -662,7 +666,7 @@
     str([object])                       # 转换为string类型
     sorted(iterable[, cmp[, key[, reverse]]])             # 集合排序
         L = [('b',2),('a',1),('c',3),('d',4)]
-        sorted(L, key=lambda x: x[1]), reverse=True)      # 使用Key参数和reverse参数
+        sorted(L, key=lambda x: x[1], reverse=True)       # 使用Key参数和reverse参数
         sorted(L, key=lambda x: (x[0], x[1]))             # 使用key参数进行多条件排序，即如果x[0]相同，则比较x[1]
 
     """逻辑判断"""
