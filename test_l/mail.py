@@ -16,7 +16,7 @@ def sendMail(ssr=None):
 
     mail_host = "smtp.126.com"  # SMTP服务器
     mail_user = "devlynn@126.com"  # 用户名
-    mail_pass = "wfl19930309"
+    mail_pass = "xxx"
     sender = mail_user
     receivers = [
         'flynn.cocoa@gmail.com',
