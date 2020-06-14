@@ -1,11 +1,11 @@
 import os
 
-def rename(path):
+def replaceFileContent(path):
 
     for file in os.listdir(path):
 
         if os.path.isdir(path + '/' + file):
-            rename(path + '/' + file)
+            replaceFileContent(path + '/' + file)
             # print('==========')
         else:
 
@@ -47,4 +47,4 @@ def rename(path):
 
 
 if __name__ == '__main__':
-    rename('/Users/lynn/Desktop/公文审批(新)')
+    replaceFileContent('/Users/lynn/Desktop/公文审批(新)')
